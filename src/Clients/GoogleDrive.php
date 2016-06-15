@@ -111,7 +111,7 @@ class GoogleDrive {
 	public function store($fullPath, $title, $description) {
 
 		$file = new \Google_Service_Drive_DriveFile();
-		$file->setTitle($title);
+		$file->setName($title);
 		$file->setDescription($description);
 		$file->setMimeType($this->getMimeType($fullPath));
 
@@ -119,7 +119,7 @@ class GoogleDrive {
 		$chunkSizeBytes = 1 * 1024 * 1024;
 
 		$this->client->setDefer(true);
-		$request = $this->service->files->insert($file);
+		$request = $this->service->files->create($file);
 
 		// Create a media file upload to represent our upload process.
 		$media = new \Google_Http_MediaFileUpload(
